@@ -1,4 +1,4 @@
-# YAPP-
+# YAPP
 Yet Another Path Planner is a Path Planning tool for testing said algorithms in 2D using Qt6. The main idea is to focus on easing the GUI on multiple platforms to make accesible to C++ developers to develop and test path planning algorithms and be able to visualize its results in multiple ways.
 
 ## What would I like to add?
