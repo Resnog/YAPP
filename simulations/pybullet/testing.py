@@ -20,8 +20,15 @@ p.setGravity(0,0,-10)
 planeId = p.loadURDF('plane.urdf')
 cubeStartPos = [0,0,1]
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-boxId = p.loadURDF('r2d2.urdf', cubeStartPos, cubeStartOrientation)
+boxId = p.loadURDF('sphere2.urdf', cubeStartPos, cubeStartOrientation)
+j = p.getNumJoints(boxId)
+print(j)
+print(pybullet_data.getDataPath())
 
+print(type(boxId))
 cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
 print(cubePos, cubeOrn)
+
+env.run()
+
 p.disconnect()
