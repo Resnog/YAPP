@@ -1,27 +1,32 @@
 
-#ifndef #define YAPP_DISPLAY_H
-
-#YAPP_DEF_RESOLUTION_X 800
-#define YAPP_DEF_RESOLUTION_Y 600
+#ifndef YAPP_DISPLAY_H
+#define YAPP_DISPLAY_H
 
 #include <array>
 #include <SFML/Graphics.hpp>
 
-#define defaultMapRowSize (6)
-#define defaultMapColumnSize (8)
+#define defaultMapRows (60/2)
+#define defaultMapColumns (80/2)
+
+#define defaultGridThickness (0.5)
 
 class defaultMap {
 
     public:
-        std::array<std::array<int, defaultMapColumnSize>, defaultMapRowSize> map;
+        unsigned int rows;
+        unsigned int cols;
+        unsigned int rowPixels;
+        unsigned int colsPixels;
+        sf::RenderWindow* window;
+        std::array<std::array<int, defaultMapColumns>, defaultMapRows> map;
 
-        defaultMap();
+        defaultMap(sf::RenderWindow* aWindow);
         
         // Update map elements in window
         void update();
 
-        // Fill map with default values
-        void defaultSetUp();
+        // Draw map in window
+        void drawMap();
 };
 
 #endif // YAPP_DISPLAY_H
