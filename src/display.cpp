@@ -26,12 +26,17 @@ defaultMap::defaultMap(sf::RenderWindow* aWindow) {
         std::cout << "Pixels per Row  : " << rowPixels << std::endl;
         std::cout << "Pixels per Col  : " << colsPixels << std::endl;
     }
-
+/*
+Draw the map on the main rendering window, this window is defined in the 
+initialization of the map. This will draw to the window all the rectangles, 
+which is ineficient and the user will feel the performance drop when using
+YAPP-SFML, this is not desired to update the states in the map.
+*/
 void defaultMap::drawMap() {
 
         sf::RectangleShape rect(sf::Vector2f(colsPixels, rowPixels));
         rect.setOutlineColor(sf::Color::Yellow);
-        rect.setOutlineThickness(defaultGridThickness);
+        rect.setOutlineThickness(defaultMapGridThickness);
         rect.setFillColor(sf::Color::Blue);
         rect.setSize(sf::Vector2f(rowPixels, colsPixels));
 

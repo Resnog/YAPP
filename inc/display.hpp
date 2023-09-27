@@ -8,8 +8,14 @@
 #define defaultMapRows (60/2)
 #define defaultMapColumns (80/2)
 
-#define defaultGridThickness (0.5)
+#define defaultMapGridThickness (0.5)
 
+/*
+The defaultMap class generates a map with the default options to run algorithms,
+this is the main class to test YAPP-SFML functionalities. The map consists on a 
+grid of N rows and M colums, the YAPP window currently has a hardcoded resolution
+of 800x600, to simplify the exercise.
+*/
 class defaultMap {
 
     public:
