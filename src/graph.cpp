@@ -1,6 +1,6 @@
 #include <vector>
 #include "graph.hpp"
 
-YAPP::Graph::Graph(GraphGeometry geometryType) {
+YAPP::Graph::Graph(NodeGeometry geometryType) {
     
 }

@@ -4,13 +4,11 @@
 
 #include <vector>
 #include "display.hpp"
+#include "node.hpp"
 
 namespace YAPP {
 
-enum GraphGeometry {
-    Square,
-    Hexagon,
-};
+
 
     /*
     The graph class stores all the nodes and defines the relationship 
@@ -19,15 +17,16 @@ enum GraphGeometry {
     class Graph {
 
         unsigned int nodeCount;
-        GraphGeometry geometryType; 
+        float resolution;
+        NodeGeometry nodeType; 
         //std::vector<>
 
-        Graph(GraphGeometry geometryType);
+        Graph(NodeGeometry nodeType);
 
         ~Graph();
 
         void loadMap(YAPP::defaultMap map);
-    }
+    };
 }
 
 #endif // YAPP_GRAPH_H
