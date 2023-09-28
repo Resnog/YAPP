@@ -5,7 +5,7 @@
 #define YAPP_DEF_RESOLUTION_X 800
 #define YAPP_DEF_RESOLUTION_Y 600
 
-defaultMap::defaultMap(sf::RenderWindow* aWindow) {
+YAPP::defaultMap::defaultMap(sf::RenderWindow* aWindow) {
         rows = defaultMapRows;
         cols = defaultMapColumns;
         window = aWindow;
@@ -32,7 +32,7 @@ initialization of the map. This will draw to the window all the rectangles,
 which is ineficient and the user will feel the performance drop when using
 YAPP-SFML, this is not desired to update the states in the map.
 */
-void defaultMap::drawMap() {
+void YAPP::defaultMap::drawMap() {
 
         sf::RectangleShape rect(sf::Vector2f(colsPixels, rowPixels));
         rect.setOutlineColor(sf::Color::Yellow);
