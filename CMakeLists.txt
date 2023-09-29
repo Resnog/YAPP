@@ -4,6 +4,11 @@ project(YAPP VERSION 0.1)
 
 set(CMAKE_CXX_STANDARD 11)
 
+set(SRC_FILES src/yapp.cpp 
+              src/display.cpp
+              src/node.cpp
+              src/graph.cpp)
+
 find_package(SFML 2.5
   COMPONENTS
     system window graphics REQUIRED)
