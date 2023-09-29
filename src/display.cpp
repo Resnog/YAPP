@@ -2,9 +2,6 @@
 #include <iostream>
 #include "display.hpp"
 
-#define YAPP_DEF_RESOLUTION_X 800
-#define YAPP_DEF_RESOLUTION_Y 600
-
 YAPP::defaultMap::defaultMap(sf::RenderWindow* aWindow) {
         rows = defaultMapRows;
         cols = defaultMapColumns;
@@ -35,9 +32,9 @@ YAPP-SFML, this is not desired to update the states in the map.
 void YAPP::defaultMap::drawMap() {
 
         sf::RectangleShape rect(sf::Vector2f(colsPixels, rowPixels));
-        rect.setOutlineColor(sf::Color::Yellow);
+        rect.setOutlineColor(sf::Color::Black);
         rect.setOutlineThickness(defaultMapGridThickness);
-        rect.setFillColor(sf::Color::Blue);
+        rect.setFillColor(sf::Color::White);
         rect.setSize(sf::Vector2f(rowPixels, colsPixels));
 
         for(int i = 0; i < this->rows; i++) {
@@ -47,10 +44,7 @@ void YAPP::defaultMap::drawMap() {
                                 rect.setPosition(sf::Vector2f(j * colsPixels,
                                                                 i * rowPixels));
                                 window->draw(rect);
-                                                
-                                
                         }
                 }
-                
         }
 }
