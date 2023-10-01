@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
                                           YAPP_DEF_RESOLUTION_Y),
                                           "Yet Another Path Planner");
 
-    YAPP::defaultMap map(&window);
-
+    YAPP::SquaredMap map(&window);
+    map.loadDefault();
     // TODO Create the algorithm solver, an easy start would be A-Star
     // since it is done in another repo
 
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
         window.clear();
 
         // NOTE: This map display is for testing the map, not the final state
-        map.drawMap();
+        map.draw();
 
         window.display();
     }
