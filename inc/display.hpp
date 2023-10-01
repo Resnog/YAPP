@@ -11,29 +11,42 @@ namespace YAPP {
 
     #define defaultMapGridThickness (0.5)
 
-    /*
-    The defaultMap class generates a map with the default options to run algorithms,
-    this is the main class to test YAPP-SFML functionalities. The map consists on a 
-    grid of N rows and M colums, the YAPP window currently has a hardcoded resolution
-    of 800x600, to simplify the exercise.
-    */
-    class defaultMap {
+
+    class Map {
 
         public:
             unsigned int rows;
             unsigned int cols;
             unsigned int rowPixels;
             unsigned int colsPixels;
-            sf::RenderWindow* window;
-            std::array<std::array<int, defaultMapColumns>, defaultMapRows> map;
+            sf::RenderWindow *window;
+            std::vector<std::vector<int>> map;
 
-            defaultMap(sf::RenderWindow* aWindow);
-            
+            std::pair<int,int> getMapSize();
+    };
+
+    /*
+    The defaultMap class generates a map with the default options to run algorithms,
+    this is the main class to test YAPP-SFML functionalities. The map consists on a 
+    grid of N rows and M colums, the YAPP window currently has a hardcoded resolution
+    of 800x600, to simplify the exercise.
+    */
+    class SquaredMap : Map {
+
+        public:
+    
+            std::vector<sf::RectangleShape> *shapeMap;
+            SquaredMap(sf::RenderWindow* aWindow);
+            ~SquaredMap();
             // Update map elements in window
-            void update();
+            void loadDefault();
 
-            // Draw map in window
-            void drawMap();
+            void draw();
+
+         private:
+
+         void loadDefaultMap();
+         void loadRenderMap();
     };
 
 }

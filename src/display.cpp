@@ -2,34 +2,64 @@
 #include <iostream>
 #include "display.hpp"
 
-YAPP::defaultMap::defaultMap(sf::RenderWindow* aWindow) {
+YAPP::SquaredMap::SquaredMap(sf::RenderWindow* aWindow) {
+
+        shapeMap = new std::vector<sf::RectangleShape>();
+        window = aWindow;
+        std::cout << "SquaredMap initialized..." << std::endl;
+    }
+
+YAPP::SquaredMap::~SquaredMap() {
+
+        delete shapeMap;
+        std::cout << "SquaredMap deleted..." << std::endl;
+    }
+
+void YAPP::SquaredMap::loadDefault() {
+
         rows = defaultMapRows;
         cols = defaultMapColumns;
-        window = aWindow;
-
+        
         sf::Vector2u size = window->getSize();
         rowPixels = size.y / rows;
         colsPixels  = size.x / cols;
-
-        for(int i = 0; i < this->rows; i++) {
-                for (int j = 0; j < this->cols; j++)
-                {
-                        map[i][j] = 1;
-                }
-                
-        }
+        
         std::cout << "Row number      : " << rows << std::endl;
         std::cout << "Col number      : " << cols << std::endl;
         std::cout << "Pixels per Row  : " << rowPixels << std::endl;
         std::cout << "Pixels per Col  : " << colsPixels << std::endl;
+        
+        loadDefaultMap();
+        loadRenderMap();
     }
+
 /*
 Draw the map on the main rendering window, this window is defined in the 
 initialization of the map. This will draw to the window all the rectangles, 
 which is ineficient and the user will feel the performance drop when using
 YAPP-SFML, this is not desired to update the states in the map.
 */
-void YAPP::defaultMap::drawMap() {
+void YAPP::SquaredMap::draw() {
+        for(auto a : *shapeMap) {
+                window->draw(a);
+        }
+}
+
+void YAPP::SquaredMap::loadDefaultMap() {
+        // Load default map
+        for (size_t i = 0; i < rows; i++)
+        {
+                std::vector<int> row;
+                map.push_back(row);
+                for (size_t j = 0; j < cols; j++){
+                        std::cout << i << std::endl;
+                        map[i].push_back(1);
+                        }
+                }
+        std::cout << "Map rows: " << map.size() << std::endl;
+        std::cout << "Map cols: " << map[0].size() << std::endl;
+}
+void YAPP::SquaredMap::loadRenderMap() {
 
         sf::RectangleShape rect(sf::Vector2f(colsPixels, rowPixels));
         rect.setOutlineColor(sf::Color::Black);
@@ -37,14 +67,19 @@ void YAPP::defaultMap::drawMap() {
         rect.setFillColor(sf::Color::White);
         rect.setSize(sf::Vector2f(rowPixels, colsPixels));
 
-        for(int i = 0; i < this->rows; i++) {
-                for (int j = 0; j < this->cols; j++)
+        for(int i = 0; i < rows; i++) {
+                
+                for (int j = 0; j < cols; j++)
                 {
-                        if(map[i][j] == 1) { 
-                                rect.setPosition(sf::Vector2f(j * colsPixels,
-                                                                i * rowPixels));
-                                window->draw(rect);
+                        if(map[i][j] == 1){
+                        rect.setPosition(sf::Vector2f(j * colsPixels,
+                                                        i * rowPixels));
+
+                        shapeMap->push_back(rect);
+                        window->draw(rect);
                         }
                 }
         }
+        std::cout << "Number of shapes :" << shapeMap->size() << std::endl;
+
 }
