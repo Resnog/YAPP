@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.22)
 
 project(YAPP VERSION 0.1)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_BUILD_TYPE Debug)
 
 set(SRC_FILES src/yapp.cpp 
               src/display.cpp
