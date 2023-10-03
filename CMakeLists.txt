@@ -14,6 +14,6 @@ find_package(SFML 2.5
   COMPONENTS
     system window graphics REQUIRED)
 
-add_executable(planners src/yapp.cpp src/display.cpp)
+add_executable(planners ${SRC_FILES})
 include_directories(inc)
 target_link_libraries(planners sfml-graphics)
