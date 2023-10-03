@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "display.hpp"
+//#include "yapp.cpp"
 
 YAPP::SquaredMap::SquaredMap(sf::RenderWindow* aWindow) {
 
@@ -52,7 +53,6 @@ void YAPP::SquaredMap::loadDefaultMap() {
                 std::vector<int> row;
                 map.push_back(row);
                 for (size_t j = 0; j < cols; j++){
-                        std::cout << i << std::endl;
                         map[i].push_back(1);
                         }
                 }
@@ -81,5 +81,15 @@ void YAPP::SquaredMap::loadRenderMap() {
                 }
         }
         std::cout << "Number of shapes :" << shapeMap->size() << std::endl;
+}
 
+YAPP::YAPP_ERR YAPP::SquaredMap::changeSquareColor( unsigned int x, 
+                                                    unsigned int y,
+                                                    sf::Color color) {
+        if( x > 0 && y > 0) {
+                shapeMap->at( (rows*x-1)+(y-1)).setFillColor(color);
+                return YAPP_OK;
+        } else {
+                return YAPP_INPUT_VALUE_ERR;
+        }
 }
