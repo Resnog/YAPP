@@ -86,8 +86,9 @@ void YAPP::SquaredMap::loadRenderMap() {
 YAPP::YAPP_ERR YAPP::SquaredMap::changeSquareColor( unsigned int x, 
                                                     unsigned int y,
                                                     sf::Color color) {
-        if( x > 0 && y > 0) {
-                shapeMap->at( (rows*x-1)+(y-1)).setFillColor(color);
+        if( x >= 0 && y >= 0) {
+                std::cout << "Item number: "<< (rows-1)*x + (cols-1)*y << std::endl;
+                shapeMap->at( cols*y +x ).setFillColor(color);
                 return YAPP_OK;
         } else {
                 return YAPP_INPUT_VALUE_ERR;

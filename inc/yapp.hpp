@@ -14,6 +14,7 @@ namespace YAPP{
         YAPP_OK,
         YAPP_MAP_LOADED,
         YAPP_MAP_LOAD_ERR,
+        YAPP_INPUT_VALUE_ERR,
     };
 
 }

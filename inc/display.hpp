@@ -4,6 +4,7 @@
 
 #include <array>
 #include <SFML/Graphics.hpp>
+#include "yapp.hpp"
 
 namespace YAPP {
     #define defaultMapRows (60/2)
@@ -31,7 +32,7 @@ namespace YAPP {
     grid of N rows and M colums, the YAPP window currently has a hardcoded resolution
     of 800x600, to simplify the exercise.
     */
-    class SquaredMap : Map {
+    class SquaredMap : public Map {
 
         public:
     
@@ -42,6 +43,9 @@ namespace YAPP {
             void loadDefault();
 
             void draw();
+
+            YAPP_ERR changeSquareColor(unsigned int x, unsigned int y,
+                                    sf::Color color);
 
          private:
 
