@@ -22,3 +22,5 @@ YAPP::Graph::Graph(NodeGeometry geometryType, YAPP::Map map) {
         
     }
 }
+
+YAPP::Graph::~Graph(){}

@@ -9,6 +9,4 @@ YAPP::Node::Node(   unsigned int newId,
     id = newId;
 }
 
-YAPP::Node::~Node() {
-
-}
+YAPP::Node::~Node() {}
