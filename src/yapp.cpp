@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "display.hpp"
+#include "map.hpp"
 #include "yapp.hpp"
 #include <SFML/Graphics.hpp>
 

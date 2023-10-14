@@ -18,7 +18,11 @@ namespace YAPP {
 
     /*
     The node is the main element that defines the state of a geometrically
-    defined area within a map. 
+    defined area within a map.
+
+    Nodes objects are created by Graph objects in order to define the geometrical
+    relationship between them, store them and facilitate the map for a search 
+    algorithm to work in.
     */
     class Node {
         
@@ -27,8 +31,9 @@ namespace YAPP {
             float positionX; 
             float positionY;
             Node* neighbours;
+            bool visitedStatus;
 
-            Node(unsigned int id, float position_x, float position_y);
+            Node(unsigned int newId, float x, float y);
             ~Node();
 
             void distance(Node a, Node b, NodeDistance distanceType);

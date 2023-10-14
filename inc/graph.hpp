@@ -3,7 +3,7 @@
 #define YAPP_GRAPH_H
 
 #include <vector>
-#include "display.hpp"
+#include "map.hpp"
 #include "node.hpp"
 
 namespace YAPP {
@@ -12,20 +12,25 @@ namespace YAPP {
 
     /*
     The graph class stores all the nodes and defines the relationship 
-    between them. 
+    between them. It is supposed to be used by any algorithm to calculate
+    a Path Planning solution for a given map, considering if that map has 
+    or has not a solution to that particular problem.
     */
     class Graph {
+        public:
+            unsigned int nodeCount;
 
-        unsigned int nodeCount;
-        float resolution;
-        NodeGeometry nodeType; 
-        //std::vector<>
+            NodeGeometry nodeType;
+            // The nodeMap is equal to a loaded map
+            std::vector<std::vector<Node>> nodeMap; 
 
-        Graph(NodeGeometry nodeType);
+            Graph(NodeGeometry nodeType, YAPP::Map map);
 
-        ~Graph();
+            ~Graph();
 
-        void loadMap(YAPP::defaultMap map);
+        private:
+            void getNodeNeighbours(Node);
+
     };
 }
 

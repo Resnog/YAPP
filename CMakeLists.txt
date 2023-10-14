@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_BUILD_TYPE Debug)
 
 set(SRC_FILES src/yapp.cpp 
-              src/display.cpp
+              src/map.cpp
               src/node.cpp
               src/graph.cpp)
 
