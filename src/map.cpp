@@ -49,7 +49,8 @@ void YAPP::SquaredMap::draw() {
                 window->draw(a);
         }
 }
-
+// TODO
+// Draw the borders in a different color
 void YAPP::SquaredMap::loadDefaultMap() {
         // Load default map
         for (size_t i = 0; i < rows; i++)
@@ -57,9 +58,16 @@ void YAPP::SquaredMap::loadDefaultMap() {
                 std::vector<int> row;
                 map.push_back(row);
                 for (size_t j = 0; j < cols; j++){
-                        map[i].push_back(1);
+                        if(i == 0 
+                           || i == rows - 1
+                           || j == 0
+                           || j == cols - 1){
+                                map[i].push_back(1);
+                        }else {
+                                map[i].push_back(0);
                         }
                 }
+        }
         std::cout << "Map rows: " << map.size() << std::endl;
         std::cout << "Map cols: " << map[0].size() << std::endl;
 }
@@ -72,16 +80,19 @@ void YAPP::SquaredMap::loadRenderMap() {
         rect.setSize(sf::Vector2f(rowPixels, colsPixels));
 
         for(int i = 0; i < rows; i++) {
-                
+                sf::Color grey = sf::Color(125,125,135,255);
                 for (int j = 0; j < cols; j++)
                 {
-                        if(map[i][j] == 1){
                         rect.setPosition(sf::Vector2f(j * colsPixels,
-                                                        i * rowPixels));
-
+                                                        i * rowPixels));                        
+                        if(map[i][j] == 1){
+                                rect.setFillColor(grey);
+                        }else { 
+                                rect.setFillColor(sf::Color::White);
+                        }
                         shapeMap->push_back(rect);
                         window->draw(rect);
-                        }
+                        
                 }
         }
         std::cout << "Number of shapes :" << shapeMap->size() << std::endl;
@@ -97,4 +108,16 @@ YAPP::YAPP_ERR YAPP::SquaredMap::changeSquareColor( unsigned int x,
         } else {
                 return YAPP_INPUT_VALUE_ERR;
         }
+}
+
+void YAPP::Map::printMap() {
+        for (size_t i = 0; i < rows; i++)
+        {
+                std::cout << std::endl;
+                for (size_t j = 0; j < cols; j++)
+                {
+                        std::cout << map[i][j] << std::ends;
+                }
+        }
+        
 }

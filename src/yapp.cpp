@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 #include "map.hpp"
+#include "node.hpp"
 #include "yapp.hpp"
+#include "graph.hpp"
 #include <SFML/Graphics.hpp>
 
 
@@ -16,8 +18,12 @@ int main(int argc, char *argv[])
 
     YAPP::SquaredMap map(&window);
     map.loadDefault();
+    map.printMap();
+    
     // TODO Create the algorithm solver, an easy start would be A-Star
     // since it is done in another repo
+    YAPP::Graph graph = YAPP::Graph(YAPP::NodeGeometry::Square,
+                                    &map);
 
     // Color one rectangle
     yappGuiErr = map.changeSquareColor(5,5, sf::Color::Red);
@@ -45,6 +51,8 @@ int main(int argc, char *argv[])
                     map.changeSquareColor( position.x/map.colsPixels,
                                             position.y/map.rowPixels,
                                             sf::Color::Blue);
+                    graph.nodeMap.at(position.y/map.rowPixels).at(position.x/map.colsPixels).printNodeInfo();
+                    
                 }
 
             default:

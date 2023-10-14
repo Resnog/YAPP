@@ -23,13 +23,14 @@ namespace YAPP {
             NodeGeometry nodeType;
             // The nodeMap is equal to a loaded map
             std::vector<std::vector<Node>> nodeMap; 
-
-            Graph(NodeGeometry nodeType, YAPP::Map map);
+            YAPP::Map *map;
+            Graph(NodeGeometry nodeType, YAPP::Map *map);
 
             ~Graph();
 
         private:
-            void getNodeNeighbours(Node);
+            void getNodeNeighbours(Node* n);
+            void getNeumannNeighbours(Node* n);
 
     };
 }

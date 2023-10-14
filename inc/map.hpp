@@ -24,6 +24,7 @@ namespace YAPP {
             std::vector<std::vector<int>> map;
 
             std::pair<int,int> getMapSize();
+            void printMap();
     };
 
     /*
@@ -46,7 +47,7 @@ namespace YAPP {
 
             YAPP_ERR changeSquareColor(unsigned int x, unsigned int y,
                                     sf::Color color);
-
+            
          private:
 
          void loadDefaultMap();

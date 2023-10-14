@@ -7,8 +7,8 @@
 namespace YAPP {
 
     enum NodeGeometry {
-        Square,
-        Hexagon,
+        Square = (size_t) 4,
+        Hexagon = (size_t) 6,
     };
 
     enum NodeDistance {
@@ -30,17 +30,19 @@ namespace YAPP {
             unsigned int id;
             float positionX; 
             float positionY;
-            Node* neighbours;
+            Node** neighbours;
             bool visitedStatus;
 
             Node(unsigned int newId, float x, float y);
             ~Node();
 
             void distance(Node a, Node b, NodeDistance distanceType);
+            void printNodeInfo();
+            
         private:
 
-        float distanceManhattan();
-        float distanceEuclid();
+            float distanceManhattan();
+            float distanceEuclid();
     };
 }
 
