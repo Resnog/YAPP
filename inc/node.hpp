@@ -28,14 +28,14 @@ namespace YAPP {
     class Node {
         
         public:
-            unsigned int id;
+            size_t id;
             float positionX; 
             float positionY;
-            std::vector<Node*> neighbours;
+            std::vector<size_t> neighbours;
             bool visitedStatus;
             bool isObstacle;
 
-            Node(unsigned int newId, float x, float y, NodeGeometry nodeType);
+            Node(size_t newId, float x, float y, NodeGeometry nodeType);
             ~Node();
 
             void distance(Node n,NodeDistance distanceType);

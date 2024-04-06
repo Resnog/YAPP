@@ -2,7 +2,7 @@
 #include <iostream>
 #include "node.hpp"
 
-YAPP::Node::Node(   unsigned int newId,
+YAPP::Node::Node(   size_t newId,
                     float x,
                     float y,
                     NodeGeometry nodeType) {

@@ -52,12 +52,12 @@ int main(int argc, char *argv[])
                     unsigned int col = position.x/map.colsPixels;
                     unsigned int row = position.y/map.rowPixels;
 
-                    if(!graph.nodeMap.at(row).at(col).isAnObstacle()) {
+                    if(!graph.nodes[graph.getNodeId(row, col)].isAnObstacle()) {
                         map.changeSquareColor( col,
                                                 row,
                                                 sf::Color::Blue);
-                                                }
-                    graph.nodeMap.at(row).at(col).printNodeInfo();
+                    }
+                    graph.nodes[graph.getNodeId(row, col)].printNodeInfo();
                     
                 }
             default:

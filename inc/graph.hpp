@@ -18,15 +18,15 @@ namespace YAPP {
     */
     class Graph {
         public:
-            unsigned int nodeCount;
-
             NodeGeometry nodeType;
-            // The nodeMap is equal to a loaded map
-            std::vector<std::vector<Node>> nodeMap; 
+            std::vector<Node> nodes;
+            std::vector<std::vector<size_t>> nodeIdMap; 
             YAPP::Map *map;
             Graph(NodeGeometry nodeType, YAPP::Map *map);
 
             ~Graph();
+
+            size_t getNodeId(size_t row, size_t col);
 
         private:
             void getNodeNeighbours(Node* n);

@@ -11,25 +11,31 @@ YAPP::Graph::Graph(NodeGeometry geometryType, YAPP::Map *map) {
     // Load map into graph
     // Loop over rows
     for(int i = 0; i < mapDimensions.first; i++) {
-        std::vector<Node> n;
-        nodeMap.push_back(n);
+        std::vector<size_t> nodeIdMapRow;
+        nodeIdMap.push_back(nodeIdMapRow);
 
         //Loop over columns
         for (int j = 0; j < mapDimensions.second; j++)
         {
             Node n = Node(id, i, j, nodeType);
-            //getNodeNeighbours(&n);
             if(map->map.at(i).at(j) == 1) {
                 n.setAsObstacle();
             }
-            nodeMap[i].push_back(n);
+            nodes.push_back(n);
+            nodeIdMap[i].push_back(n.id);
             id++;
         }
         
+        // Get all the nodes neighbours
     }
 }
 
 YAPP::Graph::~Graph(){}
+
+
+size_t YAPP::Graph::getNodeId(size_t row, size_t col) {
+    return this->nodeIdMap.at(row).at(col);
+}
 
 void YAPP::Graph::getNodeNeighbours(Node* n) {
     
@@ -41,18 +47,18 @@ void YAPP::Graph::getNodeNeighbours(Node* n) {
 void YAPP::Graph::getVonNeumannNeighbours(Node* n) {
     // Up 
     if(map->map.at(n->positionY-1).at(n->positionX)) {
-        n->neighbours[0] = &nodeMap[n->positionY-1][n->positionX];
+        n->neighbours.push_back(nodeIdMap[n->positionY-1][n->positionX]);
     }
     // Right
-    if(map->map.at(n->positionY).at(n->positionX+1)) {
-        n->neighbours[1] = &nodeMap[n->positionY][n->positionX+1];
+    if(map->map.at(n->positionY).at(n->positionX+1) ) {
+        n->neighbours.push_back(nodeIdMap[n->positionY][n->positionX+1]);
     }
     // Down
     if(map->map.at(n->positionY+1).at(n->positionX)) {
-        n->neighbours[2] = &nodeMap[n->positionY+1][n->positionX];
+        n->neighbours.push_back(nodeIdMap[n->positionY+1][n->positionX]);
     }
     // Left
     if(map->map.at(n->positionY).at(n->positionX-1)) {
-        n->neighbours[3] = &nodeMap[n->positionY][n->positionX-1];
+        n->neighbours.push_back(nodeIdMap[n->positionY][n->positionX-1]);
     }
 }
