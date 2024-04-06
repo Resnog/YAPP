@@ -4,16 +4,29 @@
 
 YAPP::Node::Node(   unsigned int newId,
                     float x,
-                    float y) {
+                    float y,
+                    NodeGeometry nodeType) {
     positionX = x;
     positionY = y;
     id = newId;
+    isObstacle = false;
+    neighbours.reserve((size_t) nodeType);
 }
 
 YAPP::Node::~Node() {}
 
 void YAPP::Node::printNodeInfo() {
-    std::cout << "Node :" << id 
-              << " Row: " << positionX
-              << " Col: " << positionY << std::endl;
+    std::cout << " Node     : " << id << std::endl
+              << " Row      : " << positionX << std::endl
+              << " Col      : " << positionY << std::endl
+              << " Obstacle : " << isObstacle << std::endl;
+    
+}
+
+void YAPP::Node::setAsObstacle() {
+    isObstacle = true;
+}
+
+bool YAPP::Node::isAnObstacle() {
+    return isObstacle;
 }

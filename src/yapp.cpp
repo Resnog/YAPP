@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     
     // TODO Create the algorithm solver, an easy start would be A-Star
     // since it is done in another repo
-    YAPP::Graph graph = YAPP::Graph(YAPP::NodeGeometry::Square,
+    YAPP::Graph graph = YAPP::Graph(YAPP::NodeGeometry::VonNeumann,
                                     &map);
 
     // Color one rectangle
@@ -48,13 +48,18 @@ int main(int argc, char *argv[])
                     std::cout << "I'm at -- X: " << position.x << " Y: " << position.y << std::endl;
                     std::cout << "At cell-- X: " << position.x/map.colsPixels 
                                 << " Y: " << position.y/map.rowPixels << std::endl;
-                    map.changeSquareColor( position.x/map.colsPixels,
-                                            position.y/map.rowPixels,
-                                            sf::Color::Blue);
-                    graph.nodeMap.at(position.y/map.rowPixels).at(position.x/map.colsPixels).printNodeInfo();
+                    
+                    unsigned int col = position.x/map.colsPixels;
+                    unsigned int row = position.y/map.rowPixels;
+
+                    if(!graph.nodeMap.at(row).at(col).isAnObstacle()) {
+                        map.changeSquareColor( col,
+                                                row,
+                                                sf::Color::Blue);
+                                                }
+                    graph.nodeMap.at(row).at(col).printNodeInfo();
                     
                 }
-
             default:
                 break;
             }

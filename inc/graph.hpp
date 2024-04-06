@@ -30,7 +30,7 @@ namespace YAPP {
 
         private:
             void getNodeNeighbours(Node* n);
-            void getNeumannNeighbours(Node* n);
+            void getVonNeumannNeighbours(Node* n);
 
     };
 }

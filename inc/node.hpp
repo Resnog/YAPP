@@ -7,8 +7,9 @@
 namespace YAPP {
 
     enum NodeGeometry {
-        Square = (size_t) 4,
+        VonNeumann = (size_t) 4,
         Hexagon = (size_t) 6,
+        Squared = (size_t) 8,
     };
 
     enum NodeDistance {
@@ -30,14 +31,17 @@ namespace YAPP {
             unsigned int id;
             float positionX; 
             float positionY;
-            Node** neighbours;
+            std::vector<Node*> neighbours;
             bool visitedStatus;
+            bool isObstacle;
 
-            Node(unsigned int newId, float x, float y);
+            Node(unsigned int newId, float x, float y, NodeGeometry nodeType);
             ~Node();
 
-            void distance(Node a, Node b, NodeDistance distanceType);
+            void distance(Node n,NodeDistance distanceType);
             void printNodeInfo();
+            void setAsObstacle();
+            bool isAnObstacle();
             
         private:
 

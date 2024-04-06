@@ -17,8 +17,11 @@ YAPP::Graph::Graph(NodeGeometry geometryType, YAPP::Map *map) {
         //Loop over columns
         for (int j = 0; j < mapDimensions.second; j++)
         {
-            Node n = Node(id,i,j);
+            Node n = Node(id, i, j, nodeType);
             //getNodeNeighbours(&n);
+            if(map->map.at(i).at(j) == 1) {
+                n.setAsObstacle();
+            }
             nodeMap[i].push_back(n);
             id++;
         }
@@ -29,7 +32,13 @@ YAPP::Graph::Graph(NodeGeometry geometryType, YAPP::Map *map) {
 YAPP::Graph::~Graph(){}
 
 void YAPP::Graph::getNodeNeighbours(Node* n) {
-    n->neighbours = new Node*[YAPP::NodeGeometry::Square];
+    
+    if(this->nodeType == NodeGeometry::VonNeumann) {
+        getVonNeumannNeighbours(n);
+    }
+}
+
+void YAPP::Graph::getVonNeumannNeighbours(Node* n) {
     // Up 
     if(map->map.at(n->positionY-1).at(n->positionX)) {
         n->neighbours[0] = &nodeMap[n->positionY-1][n->positionX];
