@@ -17,3 +17,10 @@ find_package(SFML 2.5
 add_executable(planners ${SRC_FILES})
 include_directories(inc)
 target_link_libraries(planners sfml-graphics)
+
+add_custom_target(run
+  COMMAND planners
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  COMMENT "run generated test2 in ${CMAKE_CURRENT_SOURCE_DIR}"
+  SOURCES ${test2_SOURCES}
+)
