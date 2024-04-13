@@ -19,8 +19,12 @@ void YAPP::Node::printNodeInfo() {
     std::cout << " Node     : " << id << std::endl
               << " Row      : " << positionX << std::endl
               << " Col      : " << positionY << std::endl
-              << " Obstacle : " << isObstacle << std::endl;
-    
+              << " Obstacle : " << isObstacle << std::endl
+              << " Neighs   : " << neighbours.size() << std::endl;
+              
+    for( size_t id : neighbours){
+        std::cout << "   Neighbour with: " << id << std::endl;
+    }
 }
 
 void YAPP::Node::setAsObstacle() {

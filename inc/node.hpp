@@ -32,8 +32,7 @@ namespace YAPP {
             float positionX; 
             float positionY;
             std::vector<size_t> neighbours;
-            bool visitedStatus;
-            bool isObstacle;
+            
 
             Node(size_t newId, float x, float y, NodeGeometry nodeType);
             ~Node();
@@ -44,7 +43,8 @@ namespace YAPP {
             bool isAnObstacle();
             
         private:
-
+            bool visitedStatus;
+            bool isObstacle;
             float distanceManhattan();
             float distanceEuclid();
     };

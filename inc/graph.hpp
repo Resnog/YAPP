@@ -29,8 +29,8 @@ namespace YAPP {
             size_t getNodeId(size_t row, size_t col);
 
         private:
-            void getNodeNeighbours(Node* n);
-            void getVonNeumannNeighbours(Node* n);
+            void getAllNodesNeighbours();
+            void getVonNeumannNeighbours(Node& n);
 
     };
 }
