@@ -9,14 +9,14 @@ std::pair<int,int> YAPP::Map::getMapSize() {
 
 YAPP::SquaredMap::SquaredMap(sf::RenderWindow* aWindow) {
 
-        shapeMap = new std::vector<sf::RectangleShape>();
+        nodeShapes = new std::vector<NodeDisplay>();
         window = aWindow;
         std::cout << "SquaredMap initialized..." << std::endl;
     }
 
 YAPP::SquaredMap::~SquaredMap() {
 
-        delete shapeMap;
+        delete nodeShapes;
         std::cout << "SquaredMap deleted..." << std::endl;
     }
 
@@ -45,8 +45,8 @@ which is ineficient and the user will feel the performance drop when using
 YAPP-SFML, this is not desired to update the states in the map.
 */
 void YAPP::SquaredMap::draw() {
-        for(auto a : *shapeMap) {
-                window->draw(a);
+        for(auto a : *nodeShapes) {
+                window->draw(a.nodeShape);
         }
 }
 // TODO
@@ -79,6 +79,8 @@ void YAPP::SquaredMap::loadRenderMap() {
         rect.setFillColor(sf::Color::White);
         rect.setSize(sf::Vector2f(rowPixels, colsPixels));
 
+        NodeDisplay node;
+
         for(int i = 0; i < rows; i++) {
                 sf::Color grey = sf::Color(125,125,135,255);
                 for (int j = 0; j < cols; j++)
@@ -90,10 +92,11 @@ void YAPP::SquaredMap::loadRenderMap() {
                         }else { 
                                 rect.setFillColor(sf::Color::White);
                         }
-                        shapeMap->push_back(rect);
+                        node.setNodeShape(rect);
+                        nodeShapes->push_back(node);
                 }
         }
-        std::cout << "Number of shapes :" << shapeMap->size() << std::endl;
+        std::cout << "Number of shapes :" << nodeShapes->size() << std::endl;
 }
 
 YAPP::YAPP_ERR YAPP::SquaredMap::changeSquareColor( unsigned int x, 
@@ -101,7 +104,7 @@ YAPP::YAPP_ERR YAPP::SquaredMap::changeSquareColor( unsigned int x,
                                                     sf::Color color) {
         if( x >= 0 && y >= 0) {
                 std::cout << "Item number: "<< (rows-1)*x + (cols-1)*y << std::endl;
-                shapeMap->at( cols*y +x ).setFillColor(color);
+                nodeShapes->at( cols*y +x ).nodeShape.setFillColor(color);
                 return YAPP_OK;
         } else {
                 return YAPP_INPUT_VALUE_ERR;
@@ -122,4 +125,8 @@ void YAPP::Map::printMap() {
 
 void YAPP::SquaredMap::drawItem(sf::Shape &item){
         this->window->draw(item);
+}
+
+void YAPP::NodeDisplay::setNodeShape(sf::RectangleShape &shape) {
+        nodeShape = shape;
 }

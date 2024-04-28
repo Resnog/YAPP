@@ -27,7 +27,8 @@ int main(int argc, char *argv[])
 
     // Color one rectangle
     yappGuiErr = map.changeSquareColor(5,5, sf::Color::Red);
-    map.shapeMap->at( map.cols*2 +2 ).setFillColor(sf::Color::Green);
+    yappGuiErr = map.changeSquareColor(2,2, sf::Color::Green);
+    
     // Map display loop
     while (window.isOpen())
     {

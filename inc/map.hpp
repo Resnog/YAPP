@@ -22,12 +22,13 @@ namespace YAPP {
             sf::RectangleShape nodeNeighbourDownLink;
             sf::RectangleShape nodeNeighbourLeftLink;
 
-            void createNodeShape();
-            void createNodeCenter();
-            void createNodeNeighbourUpLink();
-            void createNodeNeighbourRightLink();
-            void createNodeNeighbourDownLink();
-            void createNodeNeighbourLeftLink();
+            void setNodeShape(sf::RectangleShape &nodeShape);
+            void setNodeCenter();
+            void setNodeNeighbourUpLink();
+            void setNodeNeighbourRightLink();
+            void setNodeNeighbourDownLink();
+            void setNodeNeighbourLeftLink();
+
     };
 
     class Map {
@@ -54,7 +55,6 @@ namespace YAPP {
 
         public:
     
-            std::vector<sf::RectangleShape> *shapeMap;
             std::vector<NodeDisplay> *nodeShapes;
             SquaredMap(sf::RenderWindow* aWindow);
             ~SquaredMap();
