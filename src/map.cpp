@@ -91,8 +91,6 @@ void YAPP::SquaredMap::loadRenderMap() {
                                 rect.setFillColor(sf::Color::White);
                         }
                         shapeMap->push_back(rect);
-                        window->draw(rect);
-                        
                 }
         }
         std::cout << "Number of shapes :" << shapeMap->size() << std::endl;
@@ -120,4 +118,8 @@ void YAPP::Map::printMap() {
                 }
         }
         
+}
+
+void YAPP::SquaredMap::drawItem(sf::Shape &item){
+        this->window->draw(item);
 }
