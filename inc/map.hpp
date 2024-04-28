@@ -5,6 +5,7 @@
 #include <array>
 #include <SFML/Graphics.hpp>
 #include "yapp.hpp"
+#include "node.hpp"
 
 namespace YAPP {
     #define defaultMapRows (60/2)
@@ -12,6 +13,22 @@ namespace YAPP {
 
     #define defaultMapGridThickness (0.5)
 
+    class NodeDisplay{
+        public:
+            sf::RectangleShape nodeShape;
+            sf::CircleShape nodeCenter;
+            sf::RectangleShape nodeNeighbourUpLink;
+            sf::RectangleShape nodeNeighbourRightLink;
+            sf::RectangleShape nodeNeighbourDownLink;
+            sf::RectangleShape nodeNeighbourLeftLink;
+
+            void createNodeShape();
+            void createNodeCenter();
+            void createNodeNeighbourUpLink();
+            void createNodeNeighbourRightLink();
+            void createNodeNeighbourDownLink();
+            void createNodeNeighbourLeftLink();
+    };
 
     class Map {
 
@@ -38,12 +55,14 @@ namespace YAPP {
         public:
     
             std::vector<sf::RectangleShape> *shapeMap;
+            std::vector<NodeDisplay> *nodeShapes;
             SquaredMap(sf::RenderWindow* aWindow);
             ~SquaredMap();
             // Update map elements in window
             void loadDefault();
 
             void draw();
+            void drawItem(sf::Shape &item);
 
             YAPP_ERR changeSquareColor(unsigned int x, unsigned int y,
                                     sf::Color color);
@@ -55,4 +74,7 @@ namespace YAPP {
     };
 
 }
+
+
+
 #endif // YAPP_DISPLAY_H
