@@ -22,8 +22,10 @@ namespace YAPP {
             sf::RectangleShape nodeNeighbourDownLink;
             sf::RectangleShape nodeNeighbourLeftLink;
 
+            NodeDisplay(size_t colPixels, size_t rowPixels);
+
             void setNodeShape(sf::RectangleShape &nodeShape);
-            void setNodeCenter();
+            void setNodeCenter(float radius, float offsetX, float offsetY);
             void setNodeNeighbourUpLink();
             void setNodeNeighbourRightLink();
             void setNodeNeighbourDownLink();
@@ -43,6 +45,9 @@ namespace YAPP {
 
             std::pair<int,int> getMapSize();
             void printMap();
+        
+            bool isRowValid(size_t r);
+            bool isColValid(size_t c);
     };
 
     /*
@@ -56,11 +61,12 @@ namespace YAPP {
         public:
     
             std::vector<NodeDisplay> *nodeShapes;
+            unsigned int nodeCenterRadius;
+
             SquaredMap(sf::RenderWindow* aWindow);
             ~SquaredMap();
-            // Update map elements in window
-            void loadDefault();
 
+            void loadDefault();
             void draw();
             void drawItem(sf::Shape &item);
 

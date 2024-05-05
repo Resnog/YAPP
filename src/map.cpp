@@ -28,6 +28,7 @@ void YAPP::SquaredMap::loadDefault() {
         sf::Vector2u size = window->getSize();
         rowPixels = size.y / rows;
         colsPixels  = size.x / cols;
+        nodeCenterRadius = rowPixels / 4;
         
         std::cout << "Row number      : " << rows << std::endl;
         std::cout << "Col number      : " << cols << std::endl;
@@ -47,6 +48,7 @@ YAPP-SFML, this is not desired to update the states in the map.
 void YAPP::SquaredMap::draw() {
         for(auto a : *nodeShapes) {
                 window->draw(a.nodeShape);
+                window->draw(a.nodeCenter);
         }
 }
 // TODO
@@ -72,27 +74,25 @@ void YAPP::SquaredMap::loadDefaultMap() {
         std::cout << "Map cols: " << map[0].size() << std::endl;
 }
 void YAPP::SquaredMap::loadRenderMap() {
-
-        sf::RectangleShape rect(sf::Vector2f(colsPixels, rowPixels));
-        rect.setOutlineColor(sf::Color::Black);
-        rect.setOutlineThickness(defaultMapGridThickness);
-        rect.setFillColor(sf::Color::White);
-        rect.setSize(sf::Vector2f(rowPixels, colsPixels));
-
-        NodeDisplay node;
+        NodeDisplay node(colsPixels, rowPixels);
 
         for(int i = 0; i < rows; i++) {
                 sf::Color grey = sf::Color(125,125,135,255);
                 for (int j = 0; j < cols; j++)
                 {
-                        rect.setPosition(sf::Vector2f(j * colsPixels,
+                        node.nodeShape.setPosition(sf::Vector2f(j * colsPixels,
                                                         i * rowPixels));                        
                         if(map[i][j] == 1){
-                                rect.setFillColor(grey);
+                                node.nodeShape.setFillColor(grey);
+                                node.setNodeCenter(nodeCenterRadius,
+                                                   colsPixels,
+                                                   rowPixels);
                         }else { 
-                                rect.setFillColor(sf::Color::White);
+                                node.nodeShape.setFillColor(sf::Color::White);                        node.setNodeCenter(this->nodeCenterRadius,
+                                           this->colsPixels/4,
+                                           this->rowPixels/4);
                         }
-                        node.setNodeShape(rect);
+
                         nodeShapes->push_back(node);
                 }
         }
@@ -102,7 +102,7 @@ void YAPP::SquaredMap::loadRenderMap() {
 YAPP::YAPP_ERR YAPP::SquaredMap::changeSquareColor( unsigned int x, 
                                                     unsigned int y,
                                                     sf::Color color) {
-        if( x >= 0 && y >= 0) {
+        if( isRowValid(y) && isColValid(x)) {
                 std::cout << "Item number: "<< (rows-1)*x + (cols-1)*y << std::endl;
                 nodeShapes->at( cols*y +x ).nodeShape.setFillColor(color);
                 return YAPP_OK;
@@ -110,6 +110,14 @@ YAPP::YAPP_ERR YAPP::SquaredMap::changeSquareColor( unsigned int x,
                 return YAPP_INPUT_VALUE_ERR;
         }
 }
+
+bool inline YAPP::Map::isRowValid(size_t r){
+        return (r >= 0 && r < this->rows);
+}
+bool inline YAPP::Map::isColValid(size_t c){
+        return (c >= 0 && c < this->cols);
+}
+
 
 void YAPP::Map::printMap() {
         for (size_t i = 0; i < rows; i++)
@@ -129,4 +137,25 @@ void YAPP::SquaredMap::drawItem(sf::Shape &item){
 
 void YAPP::NodeDisplay::setNodeShape(sf::RectangleShape &shape) {
         nodeShape = shape;
+
+}
+
+YAPP::NodeDisplay::NodeDisplay(size_t colPixels, size_t rowPixels){
+        nodeShape = sf::RectangleShape(sf::Vector2f(colPixels, rowPixels));
+        nodeShape.setOutlineColor(sf::Color::Black);
+        nodeShape.setOutlineThickness(defaultMapGridThickness);
+        nodeShape.setFillColor(sf::Color::Yellow);
+        nodeShape.setSize(sf::Vector2f(rowPixels, colPixels));
+}
+
+void YAPP::NodeDisplay::setNodeCenter(float radius,
+                                      float offsetX,
+                                      float offsetY) {
+        nodeCenter.setRadius(radius);
+        nodeCenter.setFillColor(sf::Color::Red);
+        nodeCenter.setOutlineColor(sf::Color::Black);
+        sf::Vector2f pos = nodeShape.getPosition();
+        pos.x += offsetX;
+        pos.y += offsetY;
+        nodeCenter.setPosition(pos);
 }
