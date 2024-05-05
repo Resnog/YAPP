@@ -144,7 +144,7 @@ YAPP::NodeDisplay::NodeDisplay(size_t colPixels, size_t rowPixels){
         nodeShape = sf::RectangleShape(sf::Vector2f(colPixels, rowPixels));
         nodeShape.setOutlineColor(sf::Color::Black);
         nodeShape.setOutlineThickness(defaultMapGridThickness);
-        nodeShape.setFillColor(sf::Color::Yellow);
+        nodeShape.setFillColor(sf::Color::White);
         nodeShape.setSize(sf::Vector2f(rowPixels, colPixels));
 }
 
@@ -152,7 +152,7 @@ void YAPP::NodeDisplay::setNodeCenter(float radius,
                                       float offsetX,
                                       float offsetY) {
         nodeCenter.setRadius(radius);
-        nodeCenter.setFillColor(sf::Color::Red);
+        nodeCenter.setFillColor(sf::Color::Yellow);
         nodeCenter.setOutlineColor(sf::Color::Black);
         sf::Vector2f pos = nodeShape.getPosition();
         pos.x += offsetX;
