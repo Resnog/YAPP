@@ -48,7 +48,8 @@ YAPP-SFML, this is not desired to update the states in the map.
 void YAPP::SquaredMap::draw() {
         for(auto a : *nodeShapes) {
                 window->draw(a.nodeShape);
-                window->draw(a.nodeCenter);
+                // TODO: Draw the nodeCenter only if the node is occupied
+                //window->draw(a.nodeCenter);
         }
 }
 // TODO
@@ -154,6 +155,7 @@ void YAPP::NodeDisplay::setNodeCenter(float radius,
         nodeCenter.setRadius(radius);
         nodeCenter.setFillColor(sf::Color::Yellow);
         nodeCenter.setOutlineColor(sf::Color::Black);
+        nodeCenter.setOutlineThickness(defaultMapGridThickness*2);
         sf::Vector2f pos = nodeShape.getPosition();
         pos.x += offsetX;
         pos.y += offsetY;

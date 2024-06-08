@@ -9,6 +9,7 @@ YAPP::Node::Node(   size_t newId,
     positionX = x;
     positionY = y;
     id = newId;
+    visitedStatus = false;
     isObstacle = false;
     neighbours.reserve((size_t) nodeType);
 }
@@ -33,4 +34,13 @@ void YAPP::Node::setAsObstacle() {
 
 bool YAPP::Node::isAnObstacle() {
     return isObstacle;
+}
+
+
+void YAPP::Node::setAsVisited() {
+    visitedStatus = false;
+}
+
+bool YAPP::Node::hasBeenVisited() {
+    return visitedStatus;
 }

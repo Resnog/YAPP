@@ -17,6 +17,13 @@ namespace YAPP {
         Euclid,
     };
 
+    enum NodeSelection{
+        CLKWISE,
+        CTRCLKWISE,
+        RANDOM,
+        CUSTOM,
+    };
+
     /*
     The node is the main element that defines the state of a geometrically
     defined area within a map.
@@ -41,6 +48,8 @@ namespace YAPP {
             void printNodeInfo();
             void setAsObstacle();
             bool isAnObstacle();
+            void setAsVisited();
+            bool hasBeenVisited();
             
         private:
             bool visitedStatus;
