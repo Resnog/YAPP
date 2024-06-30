@@ -24,6 +24,12 @@ namespace YAPP {
         CUSTOM,
     };
 
+    enum NodeStatus {
+        nStatusAlive,
+        nStatusDead,
+        nStatusUnvisited
+    };
+
     /*
     The node is the main element that defines the state of a geometrically
     defined area within a map.
@@ -48,11 +54,11 @@ namespace YAPP {
             void printNodeInfo();
             void setAsObstacle();
             bool isAnObstacle();
-            void setAsVisited();
-            bool hasBeenVisited();
+            void setStatus(NodeStatus status);
+            NodeStatus getStatus();
             
         private:
-            bool visitedStatus;
+            NodeStatus status;
             bool isObstacle;
             float distanceManhattan();
             float distanceEuclid();
