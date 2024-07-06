@@ -8,7 +8,8 @@ set(CMAKE_BUILD_TYPE Debug)
 set(SRC_FILES src/yapp.cpp 
               src/map.cpp
               src/node.cpp
-              src/graph.cpp)
+              src/graph.cpp
+              src/algorithm.cpp)
 
 find_package(SFML 2.5
   COMPONENTS
